@@ -1,0 +1,31 @@
+{
+  "name": "anchor-schema",
+  "version": "0.0.0",
+  "description": "",
+  "main": "anchor-schema.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weo-edu/anchor-schema.git"
+  },
+  "author": "ashaffer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weo-edu/anchor-schema/issues"
+  },
+  "homepage": "https://github.com/weo-edu/anchor-schema",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "grunt-cli": "~0.1.13",
+    "bower": "~1.2.8",
+    "yo": "~1.1.2",
+    "anchor": "~0.9.7",
+    "sinon": "~1.8.1",
+    "sinon-chai": "~2.5.0"
+  },
+  "devDependencies": {
+    "chai": "~1.9.0"
+  }
+}
