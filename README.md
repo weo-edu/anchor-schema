@@ -1,4 +1,4 @@
-anchor-schema
+anchor-schema   [![Build Status](https://travis-ci.org/weo-edu/anchor-schema.png?branch=master)](https://travis-ci.org/weo-edu/anchor-schema)
 =============
 
 ### Example
