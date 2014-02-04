@@ -23,8 +23,8 @@ describe('anchor-schema', function() {
       var o = {};
       expect(validators.$validate(o)).to.be.false;
       // str isn't required, so it should be valid
-      expect(validators.str(o)).to.be.true;
-      expect(validators.reqStr(o)).to.be.false;
+      expect(validators.str(o.str, o)).to.be.true;
+      expect(validators.reqStr(o.reqStr, o)).to.be.false;
     });
 
     it('should call the callback with false for all keys', function() {

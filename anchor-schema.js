@@ -31,9 +31,8 @@ module.exports = function(attrs, types) {
 
   var validators = {};
   _.each(validations, function(curValidation, name) {
-    validators[name] = function(model, cb) {
-      var value = model && model[name]
-        , requirements = anchor(curValidation);
+    validators[name] = function(value, model, cb) {
+      var requirements = anchor(curValidation);
       // Grab value and set to null if undefined
       if(typeof value == 'undefined') value = null;
 
@@ -79,7 +78,7 @@ module.exports = function(attrs, types) {
     var self = this
     var validity = _.map(validators, function(fn, prop) {
       return prop !== '$validate'
-        ? self[prop](model, cb && cb.bind(null, prop))
+        ? self[prop](model[prop], model, cb && cb.bind(null, prop))
         : true;
     });
 
