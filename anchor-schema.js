@@ -36,19 +36,7 @@ module.exports = function(attrs, types) {
       // Grab value and set to null if undefined
       if(typeof value == 'undefined') value = null;
 
-      // If value is not required and empty then don't
-      // try and validate it
-      if(!curValidation.required) {
-        if(value === null || value === '')
-          return true;
-      }
 
-
-      // If Boolean and required manually check
-      if(curValidation.required && curValidation.type === 'boolean') {
-        if(value.toString() == 'true' || value.toString() == 'false')
-          return true;
-      }
 
       var res = {};
       _.each(requirements.data, function(req, key) {
@@ -59,14 +47,37 @@ module.exports = function(attrs, types) {
         requirements.data[key] = req.apply(model, []);
       });
 
+      function runCb() {
+         cb && _.each(res, function(val, key) {
+          cb(key, val);
+        });
+      }
+
+      // If value is not required and empty then don't
+      // try and validate it
+      if(!curValidation.required) {
+        if(value === null || value === '') {
+          runCb();
+          return true;
+        }
+
+      }
+
+
+      // If Boolean and required manually check
+      if(curValidation.required && curValidation.type === 'boolean') {
+        if(value.toString() == 'true' || value.toString() == 'false') {
+          runCb();
+          return true;
+        }
+      }
+
       var err = anchor(value).to(requirements.data, model);
       _.each(err, function(val, key) {
         res[val.rule] = false;
       });
 
-      cb && _.each(res, function(val, key) {
-        cb(key, val);
-      });
+      runCb();
 
       return ! (err && err.length);
     };
